@@ -1,0 +1,15 @@
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\bin\Debug\net8.0\InstantMessage.exe
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\bin\Debug\net8.0\InstantMessage.deps.json
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\bin\Debug\net8.0\InstantMessage.runtimeconfig.json
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\bin\Debug\net8.0\InstantMessage.dll
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\bin\Debug\net8.0\InstantMessage.pdb
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\InstantMessage.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\InstantMessage.AssemblyInfoInputs.cache
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\InstantMessage.AssemblyInfo.cs
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\InstantMessage.csproj.CoreCompileInputs.cache
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\InstantMessage.sourcelink.json
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\InstantMessage.dll
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\refint\InstantMessage.dll
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\InstantMessage.pdb
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\InstantMessage.genruntimeconfig.cache
+C:\Users\Esteb\Documentos\Datos I\Trabajos extraclase\Tarea1_DatosI\InstantMessage\InstantMessage\obj\Debug\net8.0\ref\InstantMessage.dll
