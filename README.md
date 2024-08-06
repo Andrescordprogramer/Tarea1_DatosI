@@ -1,5 +1,5 @@
 # Tarea1_DatosI
-programa de mensajería instantánea 
+programa de mensajería instantánea.
 Estudiante: Esteban Andrés Altamirano Cordero
 
 
