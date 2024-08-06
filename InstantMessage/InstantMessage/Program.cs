@@ -13,13 +13,13 @@ namespace InstantMessage
         {
             if (args.Length < 2 || args[0] != "-port")
             {
-                Console.WriteLine("Usage: dotnet run <nombre-del-proyecto> -port <puerto-escucha>");
+                Console.WriteLine("Usa: dotnet run <nombre-del-proyecto> -port <puerto-escucha>");
                 return;
             }
 
             if (!int.TryParse(args[1], out int port))
             {
-                Console.WriteLine("Invalid port number");
+                Console.WriteLine("Número de puerto inválido");
                 return;
             }
 
@@ -45,11 +45,11 @@ namespace InstantMessage
         public async Task StartAsync()
         {
             _listener.Start();
-            Console.WriteLine($"Listening on port {_port}...");
+            Console.WriteLine($"Escuchando en puerto {_port}...");
 
             var listenTask = ListenForMessagesAsync(_cancellationTokenSource.Token);
 
-            Console.WriteLine("Enter messages in the format <port> <message>");
+            Console.WriteLine("usa este formato para enviar mensajes <puerto> <mensaje>");
 
             while (true)
             {
@@ -59,13 +59,13 @@ namespace InstantMessage
                 var splitInput = input.Split(' ', 2);
                 if (splitInput.Length < 2)
                 {
-                    Console.WriteLine("Invalid input format. Use <port> <message>");
+                    Console.WriteLine("Formato inválido. Use <port> <message>");
                     continue;
                 }
 
                 if (!int.TryParse(splitInput[0], out int targetPort))
                 {
-                    Console.WriteLine("Invalid port number");
+                    Console.WriteLine("Número de puerto inválido");
                     continue;
                 }
 
@@ -96,7 +96,7 @@ namespace InstantMessage
                 while ((bytesRead = await networkStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) != 0)
                 {
                     var message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine($"Received: {message}");
+                    Console.WriteLine($"Recivido: {message}");
                 }
             }
         }
@@ -110,12 +110,12 @@ namespace InstantMessage
                     var buffer = Encoding.UTF8.GetBytes(message);
                     var networkStream = client.GetStream();
                     await networkStream.WriteAsync(buffer, 0, buffer.Length);
-                    Console.WriteLine($"Message sent to port {port}: {message}");
+                    Console.WriteLine($"Mensaje enviado al puerto {port}: {message}");
                 }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"Failed to send message: {ex.Message}");
+                Console.WriteLine($"fallo al enviar el mensaaje: {ex.Message}");
             }
         }
     }
