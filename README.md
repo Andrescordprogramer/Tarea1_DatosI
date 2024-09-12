@@ -27,7 +27,7 @@ Escribiremos Hola por ejemplo y seguidamente le damos enter, nos aparecerá lo s
   - Mensaje enviado a 5001: Hola
   - Ingrese el puerto destino:
 
-Mientras que en la instancia que escucha desde el puerto 5000 nos aparecerá este mensaje:
+Mientras que en la instancia que escucha desde el puerto 5001 nos aparecerá este mensaje:
   - Mensaje recibido: Hola
 
 
