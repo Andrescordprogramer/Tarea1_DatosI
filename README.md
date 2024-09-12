@@ -8,7 +8,7 @@ Ejecutar:
 2 - Click derecho >>> Abrir en Terminal(repetir este paso para crear varias instancias)
 
 Creacion de instancias:
-Escribir dotnet run -port <puerto-de-escucha> y luego enter
+Escribir dotnet run -port <puerto de escucha> y luego enter
   - ejemplo instancia1: dotnet run -port 5000
   - ejemplo instancia2: dotnet run -port 5001
   - ejemplo instancia3: dotnet run -port 5002
