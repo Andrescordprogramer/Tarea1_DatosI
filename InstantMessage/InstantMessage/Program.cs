@@ -3,120 +3,59 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace InstantMessage
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static async Task Main(string[] args)
+        if (args.Length != 2 || args[0] != "-port")
         {
-            if (args.Length < 2 || args[0] != "-port")
-            {
-                Console.WriteLine("Usa: dotnet run <nombre-del-proyecto> -port <puerto-escucha>");
-                return;
-            }
+            Console.WriteLine("Uso: dotnet run <nombre-del-proyecto> -port <puerto-escucha>");
+            return;
+        }
 
-            if (!int.TryParse(args[1], out int port))
-            {
-                Console.WriteLine("Número de puerto inválido");
-                return;
-            }
+        int port = int.Parse(args[1]);
+        Thread serverThread = new Thread(() => StartServer(port));
+        serverThread.Start();
 
-            ChatClient client = new ChatClient(port);
-            await client.StartAsync();
+        StartClient(port);
+    }
+
+    // Servidor que escucha en el puerto proporcionado
+    static void StartServer(int port)
+    {
+        TcpListener server = new TcpListener(IPAddress.Loopback, port);
+        server.Start();
+        Console.WriteLine($"Servidor escuchando en el puerto {port}...");
+
+        while (true)
+        {
+            TcpClient client = server.AcceptTcpClient();
+            NetworkStream stream = client.GetStream();
+            byte[] buffer = new byte[1024];
+            int bytesRead = stream.Read(buffer, 0, buffer.Length);
+            string message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
+            Console.WriteLine($"Mensaje recibido: {message}");
+            client.Close();
         }
     }
 
-    public class ChatClient
+    // Cliente que envía mensajes
+    static void StartClient(int port)
     {
-        private readonly int _port;
-        private TcpListener _listener;
-        private CancellationTokenSource _cancellationTokenSource;
-        private const int BufferSize = 1024;
-
-        public ChatClient(int port)
+        while (true)
         {
-            _port = port;
-            _listener = new TcpListener(IPAddress.Any, _port);
-            _cancellationTokenSource = new CancellationTokenSource();
-        }
+            Console.Write("Ingrese el puerto destino: ");
+            int destinationPort = int.Parse(Console.ReadLine());
+            Console.Write("Ingrese el mensaje: ");
+            string message = Console.ReadLine();
 
-        public async Task StartAsync()
-        {
-            _listener.Start();
-            Console.WriteLine($"Escuchando en puerto {_port}...");
-
-            var listenTask = ListenForMessagesAsync(_cancellationTokenSource.Token);
-
-            Console.WriteLine("usa este formato para enviar mensajes <puerto> <mensaje>");
-
-            while (true)
-            {
-                var input = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(input)) continue;
-
-                var splitInput = input.Split(' ', 2);
-                if (splitInput.Length < 2)
-                {
-                    Console.WriteLine("Formato inválido. Use <port> <message>");
-                    continue;
-                }
-
-                if (!int.TryParse(splitInput[0], out int targetPort))
-                {
-                    Console.WriteLine("Número de puerto inválido");
-                    continue;
-                }
-
-                var message = splitInput[1];
-                await SendMessageAsync(targetPort, message);
-            }
-        }
-
-        private async Task ListenForMessagesAsync(CancellationToken cancellationToken)
-        {
-            while (!cancellationToken.IsCancellationRequested)
-            {
-                if (_listener.Pending())
-                {
-                    var client = await _listener.AcceptTcpClientAsync();
-                    _ = HandleClientAsync(client, cancellationToken);
-                }
-                await Task.Delay(100, cancellationToken);
-            }
-        }
-
-        private async Task HandleClientAsync(TcpClient client, CancellationToken cancellationToken)
-        {
-            using (var networkStream = client.GetStream())
-            {
-                var buffer = new byte[BufferSize];
-                int bytesRead;
-                while ((bytesRead = await networkStream.ReadAsync(buffer, 0, buffer.Length, cancellationToken)) != 0)
-                {
-                    var message = Encoding.UTF8.GetString(buffer, 0, bytesRead);
-                    Console.WriteLine($"Recivido: {message}");
-                }
-            }
-        }
-
-        private async Task SendMessageAsync(int port, string message)
-        {
-            try
-            {
-                using (var client = new TcpClient("localhost", port))
-                {
-                    var buffer = Encoding.UTF8.GetBytes(message);
-                    var networkStream = client.GetStream();
-                    await networkStream.WriteAsync(buffer, 0, buffer.Length);
-                    Console.WriteLine($"Mensaje enviado al puerto {port}: {message}");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"fallo al enviar el mensaaje: {ex.Message}");
-            }
+            TcpClient client = new TcpClient("127.0.0.1", destinationPort);
+            NetworkStream stream = client.GetStream();
+            byte[] buffer = Encoding.UTF8.GetBytes(message);
+            stream.Write(buffer, 0, buffer.Length);
+            client.Close();
+            Console.WriteLine($"Mensaje enviado a {destinationPort}: {message}");
         }
     }
 }
